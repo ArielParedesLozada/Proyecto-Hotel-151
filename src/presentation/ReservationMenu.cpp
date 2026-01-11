@@ -94,14 +94,34 @@ namespace Presentation
     }
     Models::Date createDateUserInput()
     {
-        int year, month, day;
-        std::cout << "Ingrese el año\n";
-        std::cin >> year;
-        std::cout << "Ingrese el mes\n";
-        std::cin >> month;
-        std::cout << "Ingrese el dia\n";
-        std::cin >> day;
-        return Services::createDate(year, month, day);
+        int y, m, d;
+
+        while (true)
+        {
+            std::cout << "Fecha\n";
+            std::cout << "Anio: ";
+            std::cin >> y;
+            std::cout << "Mes: ";
+            std::cin >> m;
+            std::cout << "Dia: ";
+            std::cin >> d;
+
+            Models::Date date = Services::createDate(y, m, d);
+
+            if (!Services::isValidDate(date))
+            {
+                std::cout << "Fecha invalida\n";
+                continue;
+            }
+
+            if (!Services::isFutureDate(date))
+            {
+                std::cout << "La fecha debe ser posterior a hoy\n";
+                continue;
+            }
+
+            return date;
+        }
     }
 
 } // namespace Presentation
