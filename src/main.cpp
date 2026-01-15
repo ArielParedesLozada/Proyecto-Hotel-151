@@ -21,17 +21,11 @@ enum RoomState
     RESERVED = 1,
     OCCUPIED = 2,
 };
-enum RoomType
-{
-    NORMAL = 0,
-    SUITE = 1,
-    DOUBLE = 2,
-};
 struct Room
 {
     int id;
     RoomState status;
-    RoomType type;
+    std::vector<std::string> characteristics;
     double precio;
     int capacidad;
 };
@@ -292,9 +286,9 @@ Context createDefaultContext()
     Context ctx;
     ctx.clients.push_back({1, "Juan", "0102030405"});
     ctx.clients.push_back({2, "Maria", "0504030201"});
-    ctx.rooms.push_back({1, FREE, NORMAL, 100, 1});
-    ctx.rooms.push_back({2, FREE, SUITE, 200, 2});
-    ctx.rooms.push_back({3, FREE, DOUBLE, 300, 4});
+    ctx.rooms.push_back({1, FREE, {"Normal"}, 100, 1});
+    ctx.rooms.push_back({2, FREE, {"Wifi", "Cama grande", "Grande"}, 200, 2});
+    ctx.rooms.push_back({3, FREE, {"Wifi", "Cama doble", "Grande", "Ducha caliente"}, 300, 4});
 
     return ctx;
 }
